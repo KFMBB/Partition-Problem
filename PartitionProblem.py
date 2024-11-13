@@ -40,3 +40,46 @@ def partition_problem_BR(set):
             return True  # Partition is possible
 
     return False  # No partition found
+
+
+def partition_problem_dynamic(set):
+    total_sum = sum(set)
+    if total_sum % 2 != 0:
+        return False    # If the total sum is odd, we can't split it evenly
+    target = total_sum // 2
+    n = len(set)
+    part = [[True for i in range(n + 1)] for j in range(target + 1)] # this is the initialization for partition table
+    for i in range(n + 1):
+        part[0][i] = True # this will initialize the top row as True
+
+    for i in range(1, target + 1):
+        part[i][0] = False # this will initialize the leftmost column as False , EXCEPT [0][0] !!
+
+    for i in range(1, target + 1):
+        for j in range(1, n + 1):
+            part[i][j] = part[i][j - 1]
+            if i >= set[j - 1]:
+                part[i][j] = part[i][j] or part[i - set[j - 1]][j - 1] # this shall fill the partition table bottom - up
+
+    return part[target][n]
+
+# creating an empty list
+lst = []
+
+# number of elements as input
+n = int(input("Enter number of elements : "))
+
+# iterating till the range
+for i in range(0, n):
+	ele = int(input())
+	# adding the element
+	lst.append(ele)
+
+print(partition_problem_dynamic(lst))
+
+# this still has many problems !!!!!!!!!!
+
+
+
+
+
