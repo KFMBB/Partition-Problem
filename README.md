@@ -79,6 +79,3 @@ Using the input set `1 2 3 4 5 6`:
 - **Brute-force Limitation**: The brute-force approach has exponential time complexity and is not practical for large sets.
 - **Memory Usage**: The dynamic programming solution requires a matrix to store subset sums, which can lead to high memory consumption for large input sets.
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
