@@ -34,9 +34,10 @@ This project logs the runtime for the dynamic programming solution on each input
    python partition_solver.py
    ```
 2. **Enter Input Set**: In the input field, type integers separated by spaces.
-3. **Check Partition**: Click the "Check Partition" button to determine if the set can be split into two equal subsets.
-4. **View Results**: The application will display whether partitioning is possible, the two subsets (if possible), and the computation runtime.
-5. **Reset Fields**: Click "Reset" to clear all input and history.
+3. **Random input generation**: Users can test the implementation on a randomly generated set.
+4. **Check Partition**: Click the "Check Partition" button to determine if the set can be split into two equal subsets.
+5. **View Results**: The application will display whether partitioning is possible, the two subsets (if possible), and the computation runtime.
+6. **Reset Fields**: Click "Reset" to clear all input and history.
 
 ## Code Structure
 
