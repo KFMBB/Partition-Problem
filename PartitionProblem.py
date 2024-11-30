@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 import random
 
+
 # Function to calculate the sum of all numbers in a list
 def sum(set):
     summation = 0
@@ -80,12 +81,17 @@ def partition_problem_dynamic(set):
     subset2 = [item for item in set if item not in subset1]  # The remaining items
     return True, subset1, subset2
 
+
 # This function checks if a partition is possible and displays the result
 def check_partition():
     try:
         # Get the input from the user
         input_values = entry.get()
         set_values = list(map(int, input_values.split()))  # Convert the input to a list of numbers
+
+        # Check for duplicates in the input
+        if len(set_values) != len(set(set_values)):
+            raise ValueError("Duplicates found in the input. Please enter unique numbers.")
 
         # Solve the partition problem
         result, subset1, subset2 = partition_problem_dynamic(set_values)
@@ -97,9 +103,10 @@ def check_partition():
         else:
             result_text.set("Partition is not possible.")
             history_list.insert(tk.END, f"Set: {set_values} -> Not Possible")
-    except ValueError:
+    except ValueError as e:
         # Show an error if the input is invalid
-        messagebox.showerror("Input Error", "Please enter a list of integers separated by spaces.")
+        messagebox.showerror("Input Error", str(e))
+
 
 # This function clears all fields and the history
 def reset_fields():
@@ -108,18 +115,24 @@ def reset_fields():
     history_list.delete(0, tk.END)  # Clear the history list
     random_count_entry.delete(0, tk.END)  # Clear the random count input field
 
+
 # This function generates a random list of numbers based on the user's input
 def generate_random_list():
     try:
         count = int(random_count_entry.get())  # Get the number of elements to generate
         if count <= 0:
             raise ValueError  # Show an error if the number is invalid
-        random_list = [random.randint(1, 100) for _ in range(count)]  # Generate the random numbers
+        random_list = []
+        while len(random_list) < count:
+            num = random.randint(1, 100)
+            if num not in random_list:  # Ensure no duplicates
+                random_list.append(num)
         entry.delete(0, tk.END)  # Clear the input field
         entry.insert(0, " ".join(map(str, random_list)))  # Insert the random numbers into the input field
     except ValueError:
         # Show an error if the input for count is invalid
         messagebox.showerror("Input Error", "Please enter a valid positive integer for the number of elements.")
+
 
 # Create the main application window
 root = tk.Tk()
